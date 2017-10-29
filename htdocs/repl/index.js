@@ -92,6 +92,11 @@ var timer = moment.duration(1, "seconds").timer({ loop: true }, function () {
 });
 
 function bluetooth_connection() {
+    if (!navigator.bluetooth) {
+        console.log('WebBluetooth API is not available. Please make sure the Web Bluetooth flag is enabled');
+        toastr.error('WebBluetooth API is not available. Please make sure the Web Bluetooth flag is enabled');
+        return;
+    }
     let filters = [];
     let filterService = $('#service').val();
     if (filterService) {
@@ -148,6 +153,7 @@ function bluetooth_connection() {
         }).catch(error => {
             bluetooth_object_observable.status = "Connect";
             bluetooth_object_observable.notifications = 0;
+            toastr.error('Argh! ' + error);
             console.log('Argh! ' + error);
         });
 }
@@ -173,7 +179,7 @@ function write_to_bluetooth(array) {
     nus_rx_characteristic.writeValue(array);
 }
 
-function is_connected__to_bluetooth() {
+function is_connected_to_bluetooth() {
     if (!bluetooth_device) {
         return false;
     }
@@ -200,7 +206,7 @@ var term = new Terminal({
 });
 term.open(document.getElementById('terminal'), focus = false);
 term.on('data', function (key) {
-    if(is_connected__to_bluetooth()) {
+    if(is_connected_to_bluetooth()) {
         write_to_bluetooth(to_uint8array(key));
     } else {
         toastr.error('Bluetooth Device disconnected');
