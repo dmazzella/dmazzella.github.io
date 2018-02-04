@@ -4,13 +4,14 @@ function calculate_size() {
     return [cols, rows];
 }
 
-function to_uint8array(string, debug = false) {
-    if (debug) { console.log("to_uint8array", string); }
-    return _.map(string, function (char, index) { return char.charCodeAt(0); });
+function to_uint8array(str, debug = false) {
+    if (debug) { console.log("to_uint8array", str); }
+    var uint8array = _.map(str, function (char, index) { return char.charCodeAt(0); });
+    return Uint8Array.from(uint8array);
 }
 
 function from_uint8array(array, debug = false) {
-    if (debug) { console.log("from_uint8array", string); }
+    if (debug) { console.log("from_uint8array", array); }
     return _.map(array, function (value, index) { return String.fromCharCode(value); }).join("");
 }
 
@@ -216,8 +217,8 @@ term.on('data', function (key) {
 });
 disable_terminal()
 
-function write_terminal(string) {
-    term.write(string);
+function write_terminal(str) {
+    term.write(str);
 }
 
 function disable_terminal() {
