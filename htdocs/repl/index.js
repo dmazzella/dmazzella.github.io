@@ -1,6 +1,6 @@
 function calculate_size() {
-    let cols = Math.max(80, Math.min(150, ($( window ).width() - 260) / 8)) | 0;
-    let rows = Math.max(24, Math.min(80, ($( window ).height() - 150) / 19)) | 0;
+    let cols = Math.max(80, Math.min(150, ($(window).width() - 260) / 8)) | 0;
+    let rows = Math.max(24, Math.min(80, ($(window).height() - 150) / 19)) | 0;
     return [cols, rows];
 }
 
@@ -196,6 +196,25 @@ function nus_tx_handle_notifications(event) {
     let line = from_uint8array(new Uint8Array(value.buffer));
     write_terminal(line);
 }
+
+/* Utils */
+
+// This function keeps calling "toTry" until promise resolves or has
+// retried "max" number of times. First retry has a delay of "delay" seconds.
+// "success" is called upon success.
+function exponentialBackoff(max, delay, toTry, success, fail) {
+    toTry().then(
+        result => success(result)
+    ).catch(_ => {
+        if (max === 0) {
+            return fail();
+        }
+        console.log('Retrying in ' + delay + 's... (' + max + ' tries left)');
+        setTimeout(function () {
+            exponentialBackoff(--max, delay * 2, toTry, success, fail);
+        }, delay * 1000);
+    });
+}
 /* @@@@@@@@@@@@@@@@@@@@@@@@ Bluetooth Web API @@@@@@@@@@@@@@@@@@@@@@@@ */
 
 /* @@@@@@@@@@@@@@@@@@@@@@@@ xterm.js @@@@@@@@@@@@@@@@@@@@@@@@ */
@@ -209,7 +228,7 @@ var term = new Terminal({
 });
 term.open(document.getElementById('terminal'), focus = false);
 term.on('data', function (key) {
-    if(is_connected_to_bluetooth()) {
+    if (is_connected_to_bluetooth()) {
         write_to_bluetooth(to_uint8array(key));
     } else {
         toastr.error('Bluetooth Device disconnected');
@@ -234,7 +253,7 @@ function resize_terminal(cols, rows) {
     term.resize(cols, rows);
 }
 
-$( window ).resize(function() {
+$(window).resize(function () {
     var [cols, rows] = calculate_size();
     resize_terminal(cols, rows);
 });
