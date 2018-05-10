@@ -1,6 +1,6 @@
 function calculate_size() {
-    let cols = Math.max(80, Math.min(150, ($(window).width() - 260) / 8)) | 0;
-    let rows = Math.max(24, Math.min(80, ($(window).height() - 150) / 19)) | 0;
+    let cols = Math.max(100, Math.min(100, $(window).width() / 100)) | 0;
+    let rows = Math.max(24, Math.min(24, $(window).height() / 24)) | 0;
     return [cols, rows];
 }
 
@@ -16,11 +16,11 @@ function from_uint8array(array, debug = false) {
 }
 
 toastr.options = {
-    "closeButton": false,
+    "closeButton": true,
     "debug": false,
     "newestOnTop": false,
     "progressBar": true,
-    "positionClass": "toast-top-right",
+    "positionClass": "toast-bottom-right",
     "preventDuplicates": true,
     "onclick": null,
     "showDuration": "300",

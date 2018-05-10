@@ -21,23 +21,25 @@
                     <div class="panel-heading">
                         <form class="form-inline">
                             <div class="form-group">
+                                <label for="all_devices">Show All Devices</label>
                                 <div class="input-group">
                                     <div class="checkbox">
-                                        <input id="all_devices" type="checkbox"  data-toggle="tooltip" data-placement="right" title="Show All Devices">
+                                        <input type="checkbox" id="all_devices" class="form-control">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
+
                                 <div class="input-group">
-                                    <div class="input-group-addon">Device</div>
-                                    <input id="name" class="form-control" placeholder="repl">
+                                    <input type="text" id="name" class="form-control" placeholder="Device Name">
                                 </div>
                                 <div class="input-group">
-                                    <div class="input-group-addon">Service</div>
-                                    <input id="service" class="form-control" placeholder="Service Name">
+                                    <input type="hidden" id="service" class="form-control" placeholder="Service Name">
                                 </div>
-                                <button id="connection" class="btn btn-danger" type="button">Connect</button>
-                                <button id="connections_time" class="btn btn-primary" disabled="disabled">Disconnected</button>
+                                <div class="input-group">
+                                    <button id="connection" class="btn btn-danger" type="button">Connect</button>
+                                </div>
+                                <div class="input-group">
+                                    <button id="connections_time" class="btn btn-primary" disabled="disabled">Disconnected</button>
+                                </div>
                             </div>
                         </form>
                     </div>
