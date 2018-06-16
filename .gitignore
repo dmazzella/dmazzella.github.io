@@ -102,3 +102,6 @@ ENV/
 
 # nginx
 nginx*
+
+# history
+.history
