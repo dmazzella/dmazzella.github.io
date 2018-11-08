@@ -9,6 +9,7 @@
   <meta name="author" content="Damiano Mazzella">
   <link rel="icon" href="/htdocs/favicon.ico">
   <title>Damiano Mazzella's Projects</title>
+  <link href="/htdocs/css/prismjs-1.15.0.css" rel="stylesheet">
   <link href="/htdocs/css/bootstrap.css" rel="stylesheet">
   <link href="/index.css" rel="stylesheet">
 </head>
@@ -33,9 +34,30 @@
 
     <div class="row">
       <div class="col-md-7">
-        <a href="#">
-          <img class="img-responsive" src="/htdocs/images/api_scanner_700x300.png" alt="">
-        </a>
+        <pre>
+            <code class="language-python">
+# -*- coding: utf-8 -*-
+from binascii import hexlify
+from bluetooth_low_energy.api.scanner import Scanner
+
+def main(timeout=5000):
+
+    scan = Scanner()
+    scan_res = scan.scan(timeout)
+    for _se in scan_res:
+        print(
+            "address: {0} address_type: {1} rssi: {2} data: {3}".format(
+                hexlify(_se.address, ":"),
+                _se.address_type,
+                _se.rssi,
+                _se.get_data()
+            )
+        )
+
+if __name__ == "__main__":
+    main()
+            </code>
+          </pre>
       </div>
       <div class="col-md-5">
         <h3 class="white-text">uBLE</h3>
@@ -51,9 +73,7 @@
 
     <div class="row">
       <div class="col-md-7">
-        <a href="#">
-          <img class="img-responsive" src="https://media.giphy.com/media/xT9IgI6rvHY8d6Kjqo/source.gif" alt="MicroPython_WebBluetooth_REPL"/>
-        </a>
+        <img class="img-responsive" src="https://media.giphy.com/media/xT9IgI6rvHY8d6Kjqo/source.gif" alt="MicroPython_WebBluetooth_REPL" />
       </div>
       <div class="col-md-5">
         <h3 class="white-text">WebBluetooth REPL</h3>
@@ -78,6 +98,7 @@
 
   <script src="/htdocs/js/jquery-3.2.1.js"></script>
   <script src="/htdocs/js/bootstrap.js"></script>
+  <script src="/htdocs/js/prosmjs-1.15.0.js"></script>
 </body>
 
 </html>

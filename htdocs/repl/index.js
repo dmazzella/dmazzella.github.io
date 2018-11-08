@@ -116,49 +116,49 @@ function bluetooth_connection() {
         options.filters = filters;
     }
     console.log('Requesting Bluetooth Device with ', JSON.stringify(options));
-    navigator.bluetooth.requestDevice(options)
-        .then(device => {
-            bluetooth_object_observable.status = "Connecting";
-            console.log(bluetooth_object_observable.status, device.name);
-            bluetooth_object_observable.notifications = 0;
-            bluetooth_device = device;
-            bluetooth_device.addEventListener('gattserverdisconnected', on_disconnected);
-            return device.gatt.connect();
-        })
-        .then(server => {
-            bluetooth_object_observable.status = "Getting Services";
+    navigator.bluetooth.requestDevice(
+        options
+    ).then(device => {
+        bluetooth_object_observable.status = "Connecting";
+        console.log(bluetooth_object_observable.status, device.name);
+        bluetooth_object_observable.notifications = 0;
+        bluetooth_device = device;
+        bluetooth_device.addEventListener('gattserverdisconnected', on_disconnected);
+        return device.gatt.connect();
+    }).then(server => {
+        bluetooth_object_observable.status = "Getting Services";
+        console.log(bluetooth_object_observable.status);
+        return server.getPrimaryService(nus_primary_service_uuid);
+    }).then(service => {
+        let queue = Promise.resolve();
+        queue = queue.then(_ => service.getCharacteristics().then(characteristics => {
+            bluetooth_object_observable.status = 'Service: ' + service.uuid;
             console.log(bluetooth_object_observable.status);
-            return server.getPrimaryService(nus_primary_service_uuid);
-        }).then(service => {
-            let queue = Promise.resolve();
-            queue = queue.then(_ => service.getCharacteristics().then(characteristics => {
-                bluetooth_object_observable.status = 'Service: ' + service.uuid;
+            bluetooth_object_observable.status = "Getting Characteristics";
+            console.log(bluetooth_object_observable.status);
+            characteristics.forEach(characteristic => {
+                bluetooth_object_observable.status = 'Characteristic: ' + characteristic.uuid;
                 console.log(bluetooth_object_observable.status);
-                bluetooth_object_observable.status = "Getting Characteristics";
-                console.log(bluetooth_object_observable.status);
-                characteristics.forEach(characteristic => {
-                    bluetooth_object_observable.status = 'Characteristic: ' + characteristic.uuid;
-                    console.log(bluetooth_object_observable.status);
-                    if (characteristic.uuid == nus_rx_characteristic_uuid) {
-                        nus_rx_characteristic = characteristic;
-                    } else if (characteristic.uuid == nus_tx_characteristic_uuid) {
-                        nus_tx_characteristic = characteristic;
-                        nus_tx_characteristic.startNotifications().then(_ => {
-                            bluetooth_object_observable.status = 'Notification Enables for Characteristic: ' + characteristic.uuid;
-                            console.log(bluetooth_object_observable.status);
-                            nus_tx_characteristic.addEventListener('characteristicvaluechanged', nus_tx_handle_notifications);
-                            bluetooth_object_observable.notifications++;
-                        });
-                    }
-                });
-            }));
-            return queue;
-        }).catch(error => {
-            bluetooth_object_observable.status = "Connect";
-            bluetooth_object_observable.notifications = 0;
-            toastr.error('Argh! ' + error);
-            console.log('Argh! ' + error);
-        });
+                if (characteristic.uuid == nus_rx_characteristic_uuid) {
+                    nus_rx_characteristic = characteristic;
+                } else if (characteristic.uuid == nus_tx_characteristic_uuid) {
+                    nus_tx_characteristic = characteristic;
+                    nus_tx_characteristic.startNotifications().then(_ => {
+                        bluetooth_object_observable.status = 'Notification Enables for Characteristic: ' + characteristic.uuid;
+                        console.log(bluetooth_object_observable.status);
+                        nus_tx_characteristic.addEventListener('characteristicvaluechanged', nus_tx_handle_notifications);
+                        bluetooth_object_observable.notifications++;
+                    });
+                }
+            });
+        }));
+        return queue;
+    }).catch(error => {
+        bluetooth_object_observable.status = "Connect";
+        bluetooth_object_observable.notifications = 0;
+        toastr.error('Argh! ' + error);
+        console.log('Argh! ' + error);
+    });
 }
 
 function on_disconnected(event) {
