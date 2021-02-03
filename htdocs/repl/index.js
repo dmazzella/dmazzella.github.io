@@ -109,7 +109,11 @@ function bluetooth_connection() {
     if (filterName) {
         filters.push({ name: filterName });
     }
-    let options = {};
+    let options = {
+        optionalServices: [
+            nus_primary_service_uuid
+        ]
+    };
     if ($('#all_devices').prop('checked')) {
         options.acceptAllDevices = true;
     } else {
