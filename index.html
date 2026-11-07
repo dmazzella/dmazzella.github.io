@@ -1,104 +1,341 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Damiano Mazzella · Open-source projects</title>
+    <meta name="description" content="Open-source projects by Damiano Mazzella: modern C++ libraries, MicroPython native modules and Node.js FFI tooling." />
+    <meta name="author" content="Damiano Mazzella" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0b0d14" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Damiano Mazzella · Open-source projects" />
+    <meta property="og:description" content="Modern C++ libraries, MicroPython native modules and Node.js FFI tooling." />
+    <meta property="og:url" content="https://dmazzella.github.io/" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237c5cff'/%3E%3Ctext x='32' y='42' font-family='ui-monospace,Menlo,monospace' font-size='28' font-weight='700' text-anchor='middle' fill='white'%3Edm%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="/index.css" />
+    <script src="/index.js" defer></script>
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Damiano Mazzella's Projects">
-  <meta name="author" content="Damiano Mazzella">
-  <link rel="icon" href="/htdocs/favicon.ico">
-  <title>Damiano Mazzella's Projects</title>
-  <link href="/htdocs/css/prismjs-1.15.0.css" rel="stylesheet">
-  <link href="/htdocs/css/bootstrap.css" rel="stylesheet">
-  <link href="/index.css" rel="stylesheet">
-</head>
-
-<body>
-
-  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">Damiano Mazzella's Projects</a>
+  <body>
+    <header class="topbar">
+      <div class="wrap topbar-inner">
+        <a class="brand" href="/" aria-label="Home">
+          <span class="brand-mark">dm</span>
+          <span class="brand-name">Damiano Mazzella</span>
+        </a>
+        <nav class="topnav" aria-label="Sections">
+          <a href="#cpp">C++</a>
+          <a href="#node">Node.js</a>
+          <a href="#micropython">MicroPython</a>
+          <a class="topnav-gh" href="https://github.com/dmazzella" rel="me">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <path
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+              />
+            </svg>
+            <span>GitHub</span>
+          </a>
+        </nav>
       </div>
-    </div>
-  </nav>
+    </header>
 
-  <div class="container">
+    <main>
+      <section class="hero wrap">
+        <p class="eyebrow">Open-source · Napoli, Italia</p>
+        <h1>From microcontrollers<br /><span class="grad">to native runtimes.</span></h1>
+        <p class="lede">Header-only C++ libraries, Node.js tooling that talks straight to C, and MicroPython native modules for cryptography and hardware — all free and open-source.</p>
 
-    <div class="row">
-      <div class="col-lg-12">
-        <h1 class="page-header white-text">Micropython</h1>
-      </div>
-    </div>
+        <div class="filters" role="toolbar" aria-label="Filter projects by category">
+          <button type="button" class="chip" data-filter="all" aria-pressed="true">All <span class="count"></span></button>
+          <button type="button" class="chip" data-filter="cpp" aria-pressed="false"><i class="dot dot-cpp"></i>C++ <span class="count"></span></button>
+          <button type="button" class="chip" data-filter="node" aria-pressed="false"><i class="dot dot-node"></i>Node.js <span class="count"></span></button>
+          <button type="button" class="chip" data-filter="micropython" aria-pressed="false"><i class="dot dot-mpy"></i>MicroPython <span class="count"></span></button>
+        </div>
+      </section>
 
-    <div class="row">
-      <div class="col-md-7">
-        <pre>
-            <code class="language-python">
-# -*- coding: utf-8 -*-
-from binascii import hexlify
+      <!-- ================================================================ C++ -->
+      <section class="category wrap" id="cpp" data-category="cpp">
+        <header class="category-head">
+          <span class="category-icon">C++</span>
+          <div>
+            <h2>C++</h2>
+            <p>Modern, header-only libraries. Drop a header in, no build system gymnastics.</p>
+          </div>
+        </header>
+
+        <div class="grid">
+          <article class="card" data-repo="jose">
+            <div class="card-head">
+              <h3>jose</h3>
+              <span class="tag">C++20 · header-only</span>
+            </div>
+            <p class="card-desc">JSON Object Signing and Encryption: JWT, JWS, JWE and JWK in a single header-only library, backed by Botan with jsoncons or nlohmann/json.</p>
+            <ul class="features">
+              <li>RFC 7515 / 7516 / 7517 / 7519</li>
+              <li>HS · RS · PS · ES 256/384/512</li>
+              <li>JWKS key sets</li>
+            </ul>
+            <pre class="code" data-lang="cpp"><code>#include &lt;jose/jwt/jwt_botan_jsoncons.hpp&gt;
+
+std::error_code ec;
+std::string token = jwt::create()
+    .set_issuer("VirtualDriver")
+    .set_payload_claim("data", jwt::claim(std::string("hello")))
+    .sign(jwt::algorithm::hs256("my-secret"), ec);
+
+auto decoded = jwt::decode(token, ec);
+jwt::verify()
+    .with_issuer("VirtualDriver")
+    .allow_algorithm(jwt::algorithm::hs256("my-secret"))
+    .verify(decoded, ec);</code></pre>
+            <div class="card-links">
+              <a class="btn btn-primary" href="https://github.com/dmazzella/jose">View on GitHub</a>
+              <span class="stars" hidden></span>
+            </div>
+          </article>
+
+          <article class="card" data-repo="dotenv">
+            <div class="card-head">
+              <h3>dotenv</h3>
+              <span class="tag">C++11 · header-only</span>
+            </div>
+            <p class="card-desc">Load environment variables from <code>.env</code> files. A single header with zero dependencies, working on Windows (MSVC, MinGW), Linux and macOS.</p>
+            <ul class="features">
+              <li>Multi-line values</li>
+              <li><code>$VAR</code> / <code>${VAR}</code> expansion</li>
+              <li>Escapes &amp; inline comments</li>
+            </ul>
+            <pre class="code" data-lang="cpp"><code>#include &lt;iostream&gt;
+#include "dotenv.h"
+
+int main() {
+    // Load .env from the current directory
+    dotenv::init();
+
+    // Read with a fallback default
+    std::string host = dotenv::getenv("DATABASE_HOST", "localhost");
+    std::cout &lt;&lt; "Host: " &lt;&lt; host &lt;&lt; std::endl;
+    return 0;
+}</code></pre>
+            <div class="card-links">
+              <a class="btn btn-primary" href="https://github.com/dmazzella/dotenv">View on GitHub</a>
+              <span class="stars" hidden></span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============================================================ Node.js -->
+      <section class="category wrap" id="node" data-category="node">
+        <header class="category-head">
+          <span class="category-icon">JS</span>
+          <div>
+            <h2>Node.js</h2>
+            <p>Call native code and embed other runtimes directly from JavaScript and TypeScript.</p>
+          </div>
+        </header>
+
+        <div class="grid">
+          <article class="card" data-repo="node-ctypes">
+            <div class="card-head">
+              <h3>node-ctypes</h3>
+              <span class="tag">C++20 · N-API · libffi</span>
+            </div>
+            <p class="card-desc">Python <code>ctypes</code> for Node.js. A high-performance FFI with full ctypes compatibility: if you know Python ctypes, you already know node-ctypes.</p>
+            <ul class="features">
+              <li>Structs, unions, bit fields, arrays</li>
+              <li>Callbacks &amp; async calls</li>
+              <li>Prebuilt for Windows · macOS · Linux</li>
+            </ul>
+            <button type="button" class="install" data-copy="npm install node-ctypes">
+              <span class="install-prompt">$</span> npm install node-ctypes
+              <span class="install-hint">copy</span>
+            </button>
+            <pre class="code" data-lang="js"><code>import { CDLL, Structure, c_int32, c_size_t, c_char_p } from "node-ctypes";
+
+const libc = new CDLL(process.platform === "win32" ? "msvcrt" : null);
+
+const strlen = libc.strlen;
+strlen.argtypes = [c_char_p];
+strlen.restype = c_size_t;
+console.log(strlen("hello")); // 5n
+
+class Point extends Structure {
+  static _fields_ = [["x", c_int32], ["y", c_int32]];
+}</code></pre>
+            <div class="card-links">
+              <a class="btn btn-primary" href="https://github.com/dmazzella/node-ctypes">View on GitHub</a>
+              <a class="btn" href="https://dmazzella.github.io/node-ctypes/">Docs</a>
+              <a class="btn" href="https://www.npmjs.com/package/node-ctypes">npm</a>
+              <span class="stars" hidden></span>
+            </div>
+          </article>
+
+          <article class="card" data-repo="node-python">
+            <div class="card-head">
+              <h3>@node-ctypes/python</h3>
+              <span class="tag">TypeScript · ESM</span>
+            </div>
+            <p class="card-desc">Embed CPython in Node.js with a typed, async API powered by node-ctypes. Python runs in-process: no subprocess, no custom native bridge.</p>
+            <ul class="features">
+              <li>Live module proxies</li>
+              <li>JS modules callable from Python</li>
+              <li>asyncio &amp; async iterators</li>
+            </ul>
+            <button type="button" class="install" data-copy="npm install @node-ctypes/python">
+              <span class="install-prompt">$</span> npm install @node-ctypes/python
+              <span class="install-hint">copy</span>
+            </button>
+            <pre class="code" data-lang="js"><code>import { Python } from "@node-ctypes/python";
+
+const python = await Python.initialize({ stdout: "node", stderr: "node" });
+try {
+  const math = await python.import("math");
+  console.log(await math.sqrt(81)); // 9
+
+  await python.exec("def add(a, b): return a + b");
+  console.log(await python.main.add(20, 22)); // 42
+} finally {
+  await python.finalize();
+}</code></pre>
+            <div class="card-links">
+              <a class="btn btn-primary" href="https://github.com/dmazzella/node-python">View on GitHub</a>
+              <a class="btn" href="https://www.npmjs.com/package/@node-ctypes/python">npm</a>
+              <span class="stars" hidden></span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ======================================================== MicroPython -->
+      <section class="category wrap" id="micropython" data-category="micropython">
+        <header class="category-head">
+          <span class="category-icon">µPy</span>
+          <div>
+            <h2>MicroPython</h2>
+            <p>Native C modules and pure-Python drivers for microcontrollers: cryptography, Bluetooth, video.</p>
+          </div>
+        </header>
+
+        <div class="grid">
+          <article class="card" data-repo="ucryptography">
+            <div class="card-head">
+              <h3>ucryptography</h3>
+              <span class="tag">C · Mbed TLS</span>
+            </div>
+            <p class="card-desc">Lightweight port of PyCA <code>cryptography</code> to MicroPython. Same import paths, so the same code runs unchanged on MicroPython and CPython.</p>
+            <ul class="features">
+              <li>RSA · EC · Ed25519</li>
+              <li>AES-GCM/CBC · HMAC · HOTP/TOTP</li>
+              <li>X.509 certificates &amp; CSRs</li>
+            </ul>
+            <pre class="code" data-lang="python"><code>from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.asymmetric import padding, rsa
+
+message = b"A message I want to sign"
+pss = padding.PSS(mgf=padding.MGF1(hashes.SHA256()), salt_length=32)
+
+private_key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
+signature = private_key.sign(message, pss, hashes.SHA256())
+
+private_key.public_key().verify(signature, message, pss, hashes.SHA256())</code></pre>
+            <div class="card-links">
+              <a class="btn btn-primary" href="https://github.com/dmazzella/ucryptography">View on GitHub</a>
+              <span class="stars" hidden></span>
+            </div>
+          </article>
+
+          <article class="card" data-repo="ucrypto">
+            <div class="card-head">
+              <h3>ucrypto</h3>
+              <span class="tag">C · TomsFastMath</span>
+            </div>
+            <p class="card-desc">Fast RSA and elliptic-curve cryptography for MicroPython, focused on digital signatures. ECDSA API inspired by fastecdsa.</p>
+            <ul class="features">
+              <li>ufastrsa: sign, verify, encrypt</li>
+              <li>ufastecdsa: P-256 and friends</li>
+              <li>Arbitrary curve arithmetic</li>
+            </ul>
+            <pre class="code" data-lang="python"><code>from ufastecdsa import curve, ecdsa, keys
+
+private_key, public_key = keys.gen_keypair(curve.P256)
+
+m = "a message to sign via ECDSA"
+r, s = ecdsa.sign(m, private_key)
+
+print(ecdsa.verify((r, s), m, public_key))  # True</code></pre>
+            <div class="card-links">
+              <a class="btn btn-primary" href="https://github.com/dmazzella/ucrypto">View on GitHub</a>
+              <span class="stars" hidden></span>
+            </div>
+          </article>
+
+          <article class="card" data-repo="anx7625">
+            <div class="card-head">
+              <h3>anx7625</h3>
+              <span class="tag">C · Portenta H7</span>
+            </div>
+            <p class="card-desc">MicroPython video primitives for the Arduino Portenta H7: drive an HDMI display through the USB-C (ANX7625) bridge, with double-buffered page flipping and LVGL support.</p>
+            <ul class="features">
+              <li>800×600 RGB565 framebuffer</li>
+              <li>Double-buffered page flip</li>
+              <li>LVGL support</li>
+            </ul>
+            <pre class="code" data-lang="python"><code>import _anx7625, framebuf, machine
+
+i2c = machine.I2C(1, freq=400_000)
+pins = machine.Pin.cpu
+buf = bytearray(800 * 600 * 2 * 2)
+
+anx = _anx7625.ANX7625(i2c, pins.K2, pins.J3, pins.J6, buf, width=800, height=600)
+fb = framebuf.FrameBuffer(anx.framebuffer, anx.width, anx.height, framebuf.RGB565)
+fb.text("Hello HDMI", 20, 16, 0xFFFF)
+anx.flush()</code></pre>
+            <div class="card-links">
+              <a class="btn btn-primary" href="https://github.com/dmazzella/anx7625">View on GitHub</a>
+              <span class="stars" hidden></span>
+            </div>
+          </article>
+
+          <article class="card" data-repo="uble">
+            <div class="card-head">
+              <h3>uBLE</h3>
+              <span class="tag">Pure Python</span>
+            </div>
+            <p class="card-desc">Lightweight Bluetooth Low Energy driver written in pure Python for MicroPython: control BLE chips from a PyBoard by speaking HCI directly.</p>
+            <ul class="features">
+              <li>HCI packet parsing</li>
+              <li>HCI packet building</li>
+              <li>No native code</li>
+            </ul>
+            <pre class="code" data-lang="python"><code>from binascii import hexlify
 from bluetooth_low_energy.api.scanner import Scanner
 
-def main(timeout=5000):
-
-    scan = Scanner()
-    scan_res = scan.scan(timeout)
-    for _se in scan_res:
-        print(
-            "address: {0} address_type: {1} rssi: {2} data: {3}".format(
-                hexlify(_se.address, ":"),
-                _se.address_type,
-                _se.rssi,
-                _se.get_data()
-            )
-        )
-
-if __name__ == "__main__":
-    main()
-            </code>
-          </pre>
-      </div>
-      <div class="col-md-5">
-        <h3 class="white-text">uBLE</h3>
-        <h4 class="white-text"></h4>
-        <p class="white-text">Lightweight Bluetooth Low Energy driver written in pure python for micropython.</p>
-        <a class="btn btn-default" href="https://github.com/dmazzella/uble">View Project
-          <span class="glyphicon glyphicon-chevron-right"></span>
-        </a>
-      </div>
-    </div>
-
-    <hr>
-
-    <div class="row">
-      <div class="col-md-7">
-        <img class="img-responsive" src="https://media.giphy.com/media/xT9IgI6rvHY8d6Kjqo/source.gif" alt="MicroPython_WebBluetooth_REPL" />
-      </div>
-      <div class="col-md-5">
-        <h3 class="white-text">WebBluetooth REPL</h3>
-        <h4 class="white-text"></h4>
-        <p class="white-text">Web Bluetooth API terminal.</p>
-        <a class="btn btn-default" href="https://dmazzella.github.io/htdocs/repl/">View Project
-          <span class="glyphicon glyphicon-chevron-right"></span>
-        </a>
-      </div>
-    </div>
-
-    <hr>
-
-    <footer>
-      <div class="row">
-        <div class="col-lg-12">
+for entry in Scanner().scan(5000):
+    print(hexlify(entry.address, ":"), entry.rssi, entry.get_data())</code></pre>
+            <div class="card-links">
+              <a class="btn btn-primary" href="https://github.com/dmazzella/uble">View on GitHub</a>
+              <span class="stars" hidden></span>
+            </div>
+          </article>
         </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap footer-inner">
+        <p>© <span id="year">2026</span> Damiano Mazzella · Released under open-source licenses.</p>
+        <p>
+          <a href="https://github.com/dmazzella">GitHub</a>
+          <a href="https://www.npmjs.com/~dmazzella">npm</a>
+          <a href="https://www.buymeacoffee.com/damianomazp">Buy me a coffee</a>
+        </p>
       </div>
     </footer>
-
-  </div>
-
-  <script src="/htdocs/js/jquery-3.2.1.js"></script>
-  <script src="/htdocs/js/bootstrap.js"></script>
-  <script src="/htdocs/js/prosmjs-1.15.0.js"></script>
-</body>
-
+  </body>
 </html>
