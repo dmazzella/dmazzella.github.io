@@ -4,7 +4,7 @@
 
 const KEYWORDS = {
   python: "and as assert async await break class continue def del elif else except False finally for from global if import in is lambda None nonlocal not or pass raise return True try while with yield print",
-  js: "async await break case catch class const continue default delete do else export extends false finally for from function if import in instanceof let new null of return static super switch this throw true try typeof undefined var void while yield",
+  js: "async await break case catch class const continue default delete do else export extends false finally for from function if import in instanceof let new null of return static super switch this throw true try typeof undefined using var void while yield",
   cpp: "auto bool break case catch char class const constexpr continue default delete do double else enum explicit false float for if inline int long namespace new noexcept nullptr operator private protected public return short signed sizeof static struct switch template this throw true try typedef typename unsigned using virtual void while std",
 };
 
