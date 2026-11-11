@@ -215,11 +215,11 @@ try {
               <h3>@node-ctypes/comtypes</h3>
               <span class="tag">TypeScript · Windows</span>
             </div>
-            <p class="card-desc">Typed Windows COM support for Node.js powered by node-ctypes, modelled on Python comtypes. Client and server side, with no native addon of its own.</p>
+            <p class="card-desc">Typed Windows COM support for Node.js powered by node-ctypes, modelled on Python comtypes. Methods run asynchronously on a dedicated COM thread, so slow objects never block the event loop.</p>
             <ul class="features">
-              <li>Vtable interfaces &amp; IDispatch</li>
-              <li>Type libraries &amp; code generation</li>
-              <li>COM objects written in JavaScript</li>
+              <li>Async methods, sync properties</li>
+              <li>IDispatch, VARIANT &amp; SAFEARRAY</li>
+              <li>COM servers written in JavaScript</li>
             </ul>
             <button type="button" class="install" data-copy="npm install @node-ctypes/comtypes">
               <span class="install-prompt">$</span> npm install @node-ctypes/comtypes
@@ -229,12 +229,13 @@ try {
 
 using _ = apartment(); // CoInitializeEx ... CoUninitialize
 
-using dict = CreateObject("Scripting.Dictionary");
-dict.Add("a", 1);
-console.log(dict.Count, dict.Item("a")); // 1 1
+// Typed from the object's type library
+using dict = await CreateObject("Scripting.Dictionary");
+await dict.Add("a", 1); // methods return promises
+console.log(dict.Count, dict.Item("a")); // properties are synchronous
 
-using fso = CreateObject("Scripting.FileSystemObject");
-console.log(fso.GetTempName());</code></pre>
+using fso = await CreateObject("Scripting.FileSystemObject");
+console.log(await fso.GetTempName());</code></pre>
             <div class="card-links">
               <a class="btn btn-primary" href="https://github.com/dmazzella/node-comtypes">View on GitHub</a>
               <a class="btn" href="https://www.npmjs.com/package/@node-ctypes/comtypes">npm</a>
